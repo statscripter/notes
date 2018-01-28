@@ -1,0 +1,2 @@
+Windows:
+1. run: pip install path_to.tar.gz
