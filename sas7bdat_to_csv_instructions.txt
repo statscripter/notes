@@ -1,0 +1,15 @@
+1. Download:
+
+from
+
+https://pypi.python.org/pypi/sas7bdat
+
+sas7.bdat-2.0.7.tar.gz
+
+2. install with pip
+
+3. copy the script from the python script folder (where ever it is?) to the folder of the file or use the whole path in the commandline script
+
+4. run in the command line: 
+
+python sas7bdat_to_csv.py file.sas7bdat file.csv
