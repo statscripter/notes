@@ -1,0 +1,98 @@
+library(sqldf)
+
+cities <- read.csv("cities.csv", header = TRUE)
+countries <- read.csv("countries.csv", header = TRUE)
+
+
+
+columns_list <- colnames(cities)
+columns_cities <- data.frame(columns_list)
+
+columns_list <- colnames(countries)
+columns_countries <- data.frame(columns_list)
+
+###############
+inner_join_columns_query <- "
+SELECT * 
+FROM columns_cities as c1
+INNER JOIN columns_countries as c2
+ON c1.columns_list = c2.columns_list;"
+
+cities_both <- sqldf(inner_join_columns_query
+  
+  , stringsAsFactors = FALSE
+)
+
+#########################
+outer_join_columns_query <- "
+SELECT c1.columns_list
+FROM columns_cities as c1
+LEFT JOIN columns_countries as c2
+ON c1.columns_list = c2.columns_list;"
+
+cities_both <- sqldf(outer_join_columns_query
+                     
+                     , stringsAsFactors = FALSE
+)
+
+
+
+##########################
+
+left_join_columns_query <- "
+SELECT * 
+FROM columns_cities as c1
+LEFT JOIN columns_countries as c2
+ON c1.columns_list = c2.columns_list;"
+
+cities_left <- sqldf(left_join_columns_query
+                     
+                     , stringsAsFactors = FALSE
+)
+
+
+
+##############################
+full_outer_join_columns_query <- "
+SELECT c1.columns_list
+FROM columns_cities as c1
+LEFT JOIN columns_countries as c2
+ON c1.columns_list = c2.columns_list
+UNION ALL
+SELECT c1.columns_list
+FROM columns_countries as c1
+LEFT JOIN columns_cities as c2
+ON c1.columns_list = c2.columns_list;"
+
+columns_list_outer <- sqldf(full_outer_join_columns_query
+                     
+                     , stringsAsFactors = FALSE
+)
+
+###########################
+
+# column list
+columns_list_out
+
+_attributes <- data.frame()
+
+
+
+
+# turn a character vector "columns_list_outer" into character vectors
+for(i in 1:length(columns_list_outer$columns_list)){
+  assign(columns_list_outer[i,1], character())
+}
+
+# create a list for storing character vectors
+list_char_vectors <- list()
+
+# insert character vectors into list
+for(i in 1:length(columns_list_outer$columns_list)){
+  
+  list_char_vectors[[columns_list_outer$columns_list[i]]] <- eval(parse(text = columns_list_outer$columns_list[i]))
+  # should remove loose variable in environment (only empty vectors) but move on to core task
+}
+
+# list of names
+list_object_names <- names(list_char_vectors)
