@@ -1,0 +1,86 @@
+SELECT *, variable, DISTINCT variable, COUNT(*), (variable / 2) AS half
+FROM table
+WHERE variable >= '',
+WHERE variable >= '' AND variable >= ''
+WHERE (variable >= '' AND variable >= '')
+AND (variable2 >= '' OR variable2 >= '')
+WHERE variable >= OR variable >= ''
+WHERE variable BETWEEN '' AND ''
+WHERE variable IN ('', '', '')
+WHERE variable IS NULL
+WHERE variable LIKE '_%'
+WHERE variable NOT Like '_%'
+
+SELECT SUM(GROSS)
+FROM films
+WHERE release_year >= 2000
+WHERE title LIKE 'A%';
+WHERE release_year BETWEEN 2000 AND 2012;
+
+(Inner common between tables)
+SELECT *
+FROM left_table
+INNER JOIN right_table
+ON left_table.id = right_table.id;
+
+SELECT c1.name AS city, c2.name AS country
+FROM cities AS c1
+INNER JOIN countries AS c2
+ON c1.country_code = c2.code;
+
+
+(Inner common between tables)
+(Outer- LEFT, RIGHT, FULL)
+(LEFT - ALL LEFT record and ONLY MATCHING RIGHT)
+(RIGHT - ALL RIGHT record and ONLY MATCHING LEFT)
+(FULL - ALL RECORD with NULL in empty fields)
+
+CROSS JOIN (ALLS POSSLBE COMBINATIONS OF TWO TABLES ALL IDS)
+SEMI-JOIN uses one table to filter another
+ANTI-JOIN uses one table to elimate from another
+
+
+
+
+
+SELECT name
+
+FROM people
+
+ORDER BY birthdate;
+ORDER BY birthday desc;
+ORDER BY birthdate, name;
+
+SELECT release_year, country, MAX(budget)
+
+FROM films
+
+GROUP BY release_year, country
+
+ORDER BY release_year, country;
+
+SELECT release_year, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross
+
+FROM films
+
+WHERE release_year > 1990
+
+GROUP BY release_year
+
+HAVING AVG(budget) > 60000000
+
+ORDER BY avg_gross DESC;
+LIMIT 5
+
+SELECT release_year, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross
+
+FROM films
+
+WHERE release_year > 1990
+
+GROUP BY release_year
+
+HAVING AVG(budget) > 60000000
+
+ORDER BY avg_gross DESC;
+
